@@ -1,14 +1,12 @@
 <?php
+
 /**
  * @file
  * Generate configuration form and save settings.
  */
 
-// Include the slider functions
-include_once('slider.inc');
-
 /**
- * Implements hook_form().
+ * Configuration form for slider slides.
  */
 function nivo_slider_slide_configuration_form($form, &$form_state) {
   // Upload
@@ -64,9 +62,27 @@ function nivo_slider_slide_configuration_form($form, &$form_state) {
       '#type' => 'checkbox',
       '#default_value' => FALSE,
     );
+
+    // Load the slide's image file
     $file = file_load($settings['fid']);
+
+    // Create a preview image of the slide using an image style if appropriate
+    if (variable_get('nivo_slider_image_style', 0) == FALSE) {
+      $variables = array(
+        'path' => file_create_url($file->uri),
+      );
+      $image = theme('image', $variables);
+    }
+    else {
+      $variables = array(
+        'path' => $file->uri,
+        'style_name' => variable_get('nivo_slider_image_style_slide', 'large')
+      );
+      $image = theme('image_style', $variables);
+    }
+
     $form['images'][$slide]['preview'] = array(
-      '#markup' => theme('image', array('path' => file_create_url($file->uri))),
+      '#markup' =>  $image,
     );
     $form['images'][$slide]['fid'] = array(
       '#type' => 'hidden',
@@ -89,6 +105,7 @@ function nivo_slider_slide_configuration_form($form, &$form_state) {
       '#type' => 'textfield',
       '#title' => t('Link slide to URL'),
       '#default_value' => isset($settings['url']) ? $settings['url'] : '',
+      '#description' => t('Specify a path or an absolute URL. An example path is %blog for the blog page. An example absolute URL is %url for the Drupal website. %front is the front page.', array('%blog' => 'blog', '%url' => 'http://drupal.org', '%front' => '<front>')),
     );
     $form['images'][$slide]['visibility'] = array(
       '#type' => 'textarea',
@@ -97,29 +114,29 @@ function nivo_slider_slide_configuration_form($form, &$form_state) {
       '#default_value' => isset($settings['visibility']) ? $settings['visibility'] : '*',
     );
     $form['images'][$slide]['transition'] = array(
-    	'#type' => 'select',
-    	'#title' => t('Transition'),
-    	'#options' => array(
-    		'' => t('- Default -'),
-  	    'sliceDown' => t('Slice Down'),
-  	    'sliceDownLeft' => t('Slice Down Left'),
-  	    'sliceUp' => t('Slice Up'),
-  	    'sliceUpLeft' => t('Slice Up Left'),
-  	    'sliceUpDown' => t('Slice Up Down'),
-  	    'sliceUpDownLeft' => t('Slice Up Down Left'),
-  	    'fold' => t('Fold'),
-  	    'fade' => t('Fade'),
-  	    'random' => t('Random'),
-  	    'slideInRight' => t('Slide In Right'),
-  	    'slideInLeft' => t('Slide in Left'),
-  	    'boxRandom' => t('Box Random'),
-  	    'boxRain' => t('Box Rain'),
-  	    'boxRainReverse' => t('Box Rain Reverse'),
-  	    'boxRainGrow' => t('Box Rain Grow'),
-  	    'boxRainGrowReverse' => t('Box Rain Grow Reverse'),
-    	),
-    	'#description' => t('Select a transition. Selecting an option other than %default will force this slide to use the selected transition every time it appears. It overrides all other effect settings.', array('%default' => '- Default -')),
-    	'#default_value' => isset($settings['transition']) ? $settings['transition'] : '',
+      '#type' => 'select',
+      '#title' => t('Transition'),
+      '#options' => array(
+        '' => t('- Default -'),
+        'sliceDown' => t('Slice Down'),
+        'sliceDownLeft' => t('Slice Down Left'),
+        'sliceUp' => t('Slice Up'),
+        'sliceUpLeft' => t('Slice Up Left'),
+        'sliceUpDown' => t('Slice Up Down'),
+        'sliceUpDownLeft' => t('Slice Up Down Left'),
+        'fold' => t('Fold'),
+        'fade' => t('Fade'),
+        'random' => t('Random'),
+        'slideInRight' => t('Slide In Right'),
+        'slideInLeft' => t('Slide in Left'),
+        'boxRandom' => t('Box Random'),
+        'boxRain' => t('Box Rain'),
+        'boxRainReverse' => t('Box Rain Reverse'),
+        'boxRainGrow' => t('Box Rain Grow'),
+        'boxRainGrowReverse' => t('Box Rain Grow Reverse'),
+      ),
+      '#description' => t('Select a transition. Selecting an option other than %default will force this slide to use the selected transition every time it appears. It overrides all other effect settings.', array('%default' => '- Default -')),
+      '#default_value' => isset($settings['transition']) ? $settings['transition'] : '',
     );
   }
 
@@ -143,9 +160,9 @@ function nivo_slider_settings_submit($form, &$form_state) {
   $file = new stdClass;
 
   // Process the available slides
-  foreach ($form_state['input']['images'] as $slide => $settings) {
+  foreach ($form_state['values']['images'] as $slide => $settings) {
     // Ensure that only slide settings are processed
-    if (is_numeric($slide)){
+    if (is_numeric($slide)) {
       if (is_array($settings)) {
         // Delete the slide if required otherwise add it to the array of slides
         if ($settings['delete']) {
@@ -164,6 +181,11 @@ function nivo_slider_settings_submit($form, &$form_state) {
         }
       }
     }
+  }
+
+  // Update / create translation source for user defined slide strings
+  if (function_exists('i18n_string_update')) {
+    nivo_slider_locale_refresh($slides);
   }
 
   // Create a new slide if an image was uploaded
@@ -192,14 +214,14 @@ function nivo_slider_settings_submit($form, &$form_state) {
       'title' => '',
       'description' => array(
         'value' => '',
-        'format' => NULL,
+        'format' => filter_fallback_format(),
       ),
       'url' => '',
       'visibility' => '*',
       'transition' => '',
       'weight' => 1,
-      'published' => TRUE,
-      'delete' => FALSE,
+      'published' => 1,
+      'delete' => 0,
     );
   }
 
