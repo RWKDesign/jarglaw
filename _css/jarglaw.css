@@ -1,0 +1,215 @@
+body {
+  color: #000000 !important;
+}
+
+
+#header-menu {
+	display: none !important;
+}
+
+#header-inside-left img,
+#header-inside-left .clearfix 
+{
+	display: inline-block !important;
+}
+
+#header-inside-left .clearfix
+{
+	width: 350px !important; 
+	text-align: center;
+	line-height: 35px;
+	margin-left: -20px !important;
+}
+
+#header-inside-left {
+	margin-top: 10px !important;
+}
+
+
+.front-slide-center {
+	position: relative;
+	margin: 0px auto !important;
+	margin-top: 20px !important;
+
+}
+
+.view-slideshow .views-field-php {
+	position: relative; 
+	width: 100% !important;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	position:relative;
+	text-align:center;
+}
+
+.slider-outer {
+	width: 100% !important;
+}
+
+.views-slideshow-cycle-main-frame-row {
+	width: 100% !important;
+}
+
+/*.views-slideshow-pager-field-item{
+   float: right;
+}*/
+
+.views-field-counter{
+   float: left;
+   padding-right: 5px;
+}
+.active .views-content-counter {
+  font-weight:bold;
+}
+
+
+.slider-display-title {
+	color: #1487D4 !important;
+}
+
+/*.views-slideshow-pager-field-item {
+
+}
+
+.views-slideshow-pager-field-item .views-field-counter .views-content-counter a {
+  background-image: url(../sites/all/themes/corporateclean/images/inactive-slide.png);
+  margin-right: 0;
+  background-position: 4px 4px;
+}
+.views-slideshow-pager-field-item .views_slideshow_active_pager_field_item .views-field-counter .active .views-content-counter {
+  background-image: url(../sites/all/themes/corporateclean/images/active-slide.png);
+}*/
+
+
+.view-slideshow .views-field-body .field-content
+{
+	font-size: 15px !important;
+}
+
+.view-slideshow .views-field-field-slide-display-title .field-content {
+	font-size: 22px !important;
+}
+
+/*
+
+.region-footer-bottom-right .content,
+.region-footer-bottom-right .label
+{
+	text-align: right !important;
+}
+
+.region-footer-bottom-right ul.social-bookmarks {
+	float: right;
+	clear: all;
+}
+
+*/
+
+#footer h2 {
+	color: #BEA340;
+}
+
+.menu-name-menu-areas-of-practice ul.menu a {
+  color: black;
+}
+
+h1 {
+  color: black !important;
+}
+
+
+
+
+/**
+ *Styling for the header and footer
+ */
+#header {
+  border: 1px solid #000000;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;
+  color: #7A7A7A;
+}
+
+#footer-container {
+  border: 1px solid #000000;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;
+  padding: 1px;
+  color: #7A7A7A;
+}
+
+
+
+
+
+/**
+ *Styling for content region
+ */
+#content {
+  padding-top: 10px;
+}
+
+
+
+
+
+.page-home .view-slideshow img {
+  -moz-box-shadow: 3px 3px 4px 2px gray;
+  -webkit-box-shadow: 3px 3px 4px 2px gray;
+  box-shadow: 3px 3px 4px 2px gray;
+}
+
+
+
+
+
+/**
+ *Styling for contact us webform
+ */
+#webform-client-form-14 #edit-submitted-name,
+#webform-client-form-14 #edit-submitted-email
+{
+  width: 100%;
+}
+
+
+
+
+
+#connect-button {
+color:#fefefe; text-shadow: 0 1px 1px #003547; 
+/* background */
+background: #0093c5;
+/* IE10 */ 
+background-image: -ms-linear-gradient(top, #0093c5 0%, #0079a2 100%);
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #0093c5 0%, #0079a2 100%);
+/* Opera */ 
+background-image: -o-linear-gradient(top, #0093c5 0%, #0079a2 100%);
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0093c5), color-stop(1, #0079a2));
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #0093c5 0%, #0079a2 100%);
+/* Proposed W3C Markup */ 
+background-image: linear-gradient(top, #0093c5 0%, #0079a2 100%);
+/* IE6-9 */ 
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0093c5', endColorstr='#0079a2');
+/* shadow */
+-webkit-box-shadow: 0px 1px 2px #939da2; -moz-box-shadow: 0px 1px 2px #939da2; box-shadow: 0px 1px 2px #939da2; 
+
+border-radius: 15px 15px 15px 15px;
+-moz-border-radius: 15px 15px 15px 15px;
+
+padding: 7px 15px;
+
+display: inline;
+
+}
+
+
+
+
+#main a {
+  color: black;
+}
+
+
