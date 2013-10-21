@@ -2,13 +2,13 @@
 <div id="header">
 	<!-- #header-inside -->
     <div id="header-inside">
-    	<!-- #header-inside-left -->
+    	<!-- #header-inside-left -->    
         <div id="header-inside-left">
             
             <?php if ($logo): ?>
             <a href="<?php print check_url($front_page); ?>" title="<?php print t('Home'); ?>"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" /></a>
             <?php endif; ?>
-     
+     <!--
             <?php if ($site_name || $site_slogan): ?>
             <div class="clearfix">
             <?php if ($site_name): ?>
@@ -17,10 +17,10 @@
             <?php if ($site_slogan): ?>
             <span id="slogan"><?php print $site_slogan; ?></span>
             <?php endif; ?>
-            </div>
-            <?php endif; ?>
+            </div><!-- /site-name-wrapper -->
+     <!--       <?php endif; ?>-->
             
-        </div><!-- EOF: #header-inside-left -->
+        </div>
         
         <!-- #header-inside-right -->
         <div id="header-inside-right">
